@@ -1,7 +1,7 @@
 # Wolf_Simulation
-Wolf Simulation for University of Washington Tacoma TCSS435: Artificial Intelligence. Goal of project is to modify the <a href="https://github.com/algorithm0r/WolfPack">provided simulation</a> to run a research experiment.
+Wolf Simulation for University of Washington Tacoma TCSS435: Artificial Intelligence. This is an archived project not currently being updated, however it is currently largely functional on the appropriate github.io link provided in the About section of this project. To not cause the professor's server unnecessary or unpredictable load, the URL of the database this simulation was designed for has been removed from the code. Attempting to use functionality that requires it will cause issue.
 
-The simulation has been updated to include multiple sliders for adjusting behaviors of predators and prey, as well as updating the included code to the modern js object notation.
+Goal of project was to modify the <a href="https://github.com/algorithm0r/WolfPack">provided simulation</a> to run a research experiment. The simulation has been updated to include multiple sliders for adjusting behaviors of predators and prey, as well as updating the included code to the modern js object notation.
 
 # Data Collection Mode
 It is possible to upload data to the database by following these instructions:

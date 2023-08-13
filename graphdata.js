@@ -2,6 +2,11 @@
  * Function that's automatically called when user hits Generate Graph button.
  */
 function graphResponse() {
+    if (!params.lastDBResponse) {
+        console.log('No valid file to parse.');
+        return;
+    }
+
     let results = {};
 
     results.timeStamp = [];

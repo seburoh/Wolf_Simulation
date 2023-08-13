@@ -107,7 +107,10 @@ function reset() {
  * Connect to remote database.
  */
 function databaseConnectSetup() {
-    socket = io.connect('http://73.225.31.4:8888'); //connect out
+    console.log('Database functionality disabled, please check README.');
+    return; //remove this line if you intend to allow for database functionality.
+
+    socket = io.connect('URL GO HERE'); //connect out
 
     socket.on("find", function (array) {
         if (array.length > 0) parseResponse(array);
@@ -198,6 +201,11 @@ function startSim() {
  * Upload results to DB.
  */
 function simUpload() {
+    if (!params.dbConnectSuccess) {
+        console.log('No valid database connection formed.');
+        return;
+    }
+
     console.log('Uploading run #' + params.runCount);
     //collect data in JSON to yeet out
     var data = {
@@ -305,6 +313,10 @@ function printPosDataDB(positions) {
  * Call to DB to get data matching sliders.
  */
 function getDataFromDB() {
+    if (!params.dbConnectSuccess) {
+        console.log('No valid database connection formed.');
+        return;
+    }
     var runTypeQuery = document.getElementById("getRunType").value;
     var cohesionQuery = parseFloat(document.getElementById("getCohesionVal").value);
     var alignmentQuery = parseFloat(document.getElementById("getAlignmentVal").value);
@@ -330,6 +342,10 @@ function getDataFromDB() {
  * @param {JSON} fileName 
  */
 function downloadObjectAsJSON(fileName) {
+    if (!params.lastDBResponse) {
+        console.log('No valid file to download.');
+        return;
+    }
     const jsonContent = JSON.stringify(params.lastDBResponse);
     const blob = new Blob([jsonContent], { type: "application/json" });
     const url = URL.createObjectURL(blob);
