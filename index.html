@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Wolf Simulation Red 3</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Create two equal columns that floats next to each other */
+    .column {
+      float: left;
+      width: 512;
+      padding: 10px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="gameWorld" width="1024" height="768" style="background: black; border: 1px solid black" tabindex="0"
+    autofocus></canvas>
+  <div>
+    <div id="UploadTitle">Data Collection Settings</div>
+    <button type="button" id="reset" class="button">Reset</button>
+    <button type="button" id="start_sim" class="button">DataSim</button>
+    <label for="typeInput">Run Type:</label>
+    <input type="text" id="typeInput" style="width: 100px;" />
+    <label for="numberInput">Run Count:</label>
+    <input type="text" id="numberInput" style="width: 50px;" />
+    <label for="tickTarget">Target Tick:</label>
+    <input type="text" id="tickTarget" style="width: 50px;" />
+    <label for="freezeDisplay">
+      <input type="checkbox" id="freezeDisplay">
+      Freeze Visual &nbsp;&nbsp;|&nbsp;
+    </label>
+    <label for="useDB">
+      <input type="checkbox" id="useDB">
+      Use Database &nbsp;&nbsp;|
+    </label>
+    &nbsp;
+    <span id="ticks">Ticks: 0</span>
+  </div>
+
+  <br>
+
+  <div>
+    <div id="DownloadTitle">Data Retrieval Settings</div>
+    <button type="button" id="dlData" class="button">Download</button>
+    <button type="button" id="getData" class="button">Get Data</button>
+    <label for="verboseResponse">
+      <input type="checkbox" id="verboseResponse">
+      Verbose Console&nbsp;&nbsp;|&nbsp;
+    </label>
+    <label for="getRunType">Run Type:</label>
+    <input type="text" id="getRunType" style="width: 100px;" />
+    <label for="getCohesionVal">Cohesion Val:</label>
+    <input type="text" id="getCohesionVal" style="width: 50px;" />
+    <label for="getAlignmentVal">Alignment Val:</label>
+    <input type="text" id="getAlignmentVal" style="width: 50px;" />
+    <label for="getSeparationVal">Separation Val:</label>
+    <input type="text" id="getSeparationVal" style="width: 50px;" />
+  </div>
+
+  <br>
+  <div id="SettingsTitle">Simulation Settings</div>
+
+  <div class="column">
+    <div id="PreyStat">Prey Stats</div>
+    </br>
+    <div id="PreyRadius">Prey visual radius: 100</div>
+    <label for="prey_radius">Small</label>
+    <input type="range" id="prey_radius" min="0" max="200" value="100" step="10">
+    <label for="prey_radius">Large</label>
+
+    <div id="PreyMaxSpeed">Prey max speed: 22</div>
+    <label for="prey_max_speed">Slow</label>
+    <input type="range" id="prey_max_speed" min="1" max="100" value="22" step="1">
+    <label for="prey_max_speed">Fast</label>
+
+    <div id="PreyMinSpeed">Prey min speed: 1.4</div>
+    <label for="prey_min_speed">Slow</label>
+    <input type="range" id="prey_min_speed" min="1" max="10" value="1.4" step="0.1">
+    <label for="prey_min_speed">Fast</label>
+
+    <div id="PreyDecay">Prey decay: 0.982</div>
+    <label for="prey_decay">Slow</label>
+    <input type="range" id="prey_decay" min="0" max="2" value="0.982" step="0.001">
+    <label for="prey_decay">Fast</label>
+  </div>
+  <div class="column">
+    <div id="PredStat">Predator Stats</div>
+    </br>
+    <div id="PredatorRadius">Predator vision radius: 150</div>
+    <label for="predator_radius">Small</label>
+    <input type="range" id="predator_radius" min="0" max="200" value="150" step="10">
+    <label for="predator_radius">Large</label>
+
+    <div id="PredatorMaxSpeed">Predator max speed: 17</div>
+    <label for="predator_max_speed">Slow</label>
+    <input type="range" id="predator_max_speed" min="1" max="100" value="17" step="1">
+    <label for="predator_max_speed">Fast</label>
+
+    <div id="PredatorMinSpeed">Predator min speed: 2.2</div>
+    <label for="predator_min_speed">Slow</label>
+    <input type="range" id="predator_min_speed" min="1" max="10" value="2.2" step="0.1">
+    <label for="predator_min_speed">Fast</label>
+
+    <div id="PredatorDecay">Predator decay: 0.987</div>
+    <label for="predator_decay">Slow</label>
+    <input type="range" id="predator_decay" min="0" max="2" value="0.987" step="0.001">
+    <label for="predator_decay">Fast</label>
+  </div>
+  <div class="column">
+    <div id="PredW">Predator Weights</div>
+    </br>
+    <div id="coWeight">Cohesion weight: 0.25</div>
+    <label for="coh_weight">Small</label>
+    <input type="range" id="coh_weight" min="0" max="1" value="0.25" step="0.01">
+    <label for="coh_weight">Large</label>
+
+    <div id="alWeight">Alignment weight: 0.075</div>
+    <label for="ali_weight">Small</label>
+    <input type="range" id="ali_weight" min="0" max="1" value="0.075" step="0.001">
+    <label for="ali_weight">Large</label>
+
+    <div id="seWeight">Separation weight: 25</div>
+    <label for="sep_weight">Small</label>
+    <input type="range" id="sep_weight" min="0" max="50" value="25" step="1">
+    <label for="sep_weight">Large</label>
+
+    <div id="fleeWeight">Flee weight: 10000</div>
+    <label for="fle_weight">Small</label>
+    <input type="range" id="fle_weight" min="0" max="10000" value="10000" step="100">
+    <label for="fle_weight">Large</label>
+  </div>
+
+  <script type="text/javascript" src="./assetmanager.js"></script>
+  <script type="text/javascript" src="./timer.js"></script>
+  <script type="text/javascript" src="./gameengine.js"></script>
+  <script type="text/javascript" src="./util.js"></script>
+  <script type="text/javascript" src="./circle.js"></script>
+  <script type="text/javascript" src="./main.js"></script>
+  <script type="text/javascript" src="./graphdata.js"></script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.1/socket.io.js">
+  </script>
+</body>
+
+</html>

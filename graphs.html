@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Wolf Simulation Red 3 - Graphs</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            float: left;
+            width: 512;
+            padding: 10px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div id="DownloadTitle">Data Retrieval Settings</div>
+        <button type="button" id="dlData" class="button">Download</button>
+        <button type="button" id="graphData" class="button">Generate Graphs</button>
+        <button type="button" id="getData" class="button">Get Data</button>
+        <label for="verboseResponse">
+            <input type="checkbox" id="verboseResponse">
+            Verbose Console&nbsp;&nbsp;|&nbsp;
+        </label>
+        <label for="getRunType">Run Type:</label>
+        <input type="text" id="getRunType" style="width: 100px;" />
+        <label for="getCohesionVal">Cohesion Val:</label>
+        <input type="text" id="getCohesionVal" style="width: 50px;" />
+        <label for="getAlignmentVal">Alignment Val:</label>
+        <input type="text" id="getAlignmentVal" style="width: 50px;" />
+        <label for="getSeparationVal">Separation Val:</label>
+        <input type="text" id="getSeparationVal" style="width: 50px;" />
+    </div>
+    <br>
+    <div id="infoDisplay">You must use Get Data before generating graphs or downloading data.</div>
+    <br>
+    <div style="width: 80%; margin: auto;">
+        <div id="catchDistanceChart"></div>
+    </div>
+    <br>
+    <div style="width: 80%; margin: auto;">
+        <div id="catchChart"></div>
+    </div>
+    <br>
+    <div style="width: 80%; margin: auto;">
+        <div id="wolfChart"></div>
+    </div>
+    <br>
+    <div style="width: 80%; margin: auto;">
+        <div id="weakChart"></div>
+    </div>
+
+    <script type="text/javascript" src="./assetmanager.js"></script>
+    <script type="text/javascript" src="./timer.js"></script>
+    <script type="text/javascript" src="./gameengine.js"></script>
+    <script type="text/javascript" src="./util.js"></script>
+    <script type="text/javascript" src="./circle.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+    <script type="text/javascript" src="./graphdata.js"></script>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.1/socket.io.js"></script>
+</body>
+
+</html>
